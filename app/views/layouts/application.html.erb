@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="app">
   <head>
     <title>Untitled</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
-    <%= yield %>
+    <div class="navbar navbar-static-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Simple-Forum</a>
+        </div>
+      </div>
+      <div id="loading"><b>Loading...</b></div>
+    </div>
+
+    <div class="container">
+      <div ng-view="ng-view"></div>
+    </div>
+    <script src="angular/lib/angular.min.js"></script>
+    <script src="angular/lib/angular-resource.js"></script>
+    <script src="angular/app.js"></script>
   </body>
+
 </html>

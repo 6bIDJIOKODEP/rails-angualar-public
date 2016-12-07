@@ -1,0 +1,58 @@
+<h2>Cars</h2>
+
+<div class="row">
+
+    <div class="span9">
+
+        <!-- This will only show when there's no items to let the user know there's purposefully nothing there.. -->
+        <div ng-show="items.$resolved && items.length == 0">
+            <hr/>
+            <h4>There's nothing here...</h4>
+
+            <p>Use the 'New' button to create a new car!</p>
+        </div>
+
+        <!-- A nice table that will contain a list of Forums -->
+        <table class="table table-hover">
+            <!-- This will create a row for every item within our items object (both of these refer to the forums -->
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Model</th>
+                    <th>Producer</th>
+                    <th>-</th>
+                    <th>-</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="car in cars">
+                    {{ cosnole.log(cars) }}
+                    <td> {{car.id }}</td>
+                    <td width="100%"> {{car.name }} </td>
+                    <td> {{car.producer }}</td>
+                    <!--<td><span ng-bind="car.name"></span></td>-->
+                    <td><a href="#/car/{{car.id}}">Details</a></td>
+                    <!-- When the user clicks this button it will call the 'destory()' method within the controller -->
+
+                    <!--<td><a ng-click="destroy($index)" href="">Delete</a></td>-->
+                    <td><a ng-click="destroy($index)" href=""><i class="icon-trash"></i>Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="span3">
+
+        <a href="#/cars/new" class="btn btn-primary btn-block btn-large">New</a>
+
+        <br />
+
+        <div class="well">
+            <p>
+                Angular lab
+            </p>
+
+        </div>
+    </div>
+</div>
