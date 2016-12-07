@@ -1,13 +1,13 @@
 <h2>New toy car</h2>
 
 <!-- When the form is submitted call the save() function within the controller -->
-<form ng-submit="save()" class="form-vertical">
+<form ng-submit="save()" class="form-vertical" name="myForm">
 
     <!-- The control-group, control-label, and controls classes are Bootstrap specific -->
     <div class="form-group">
         <label for="newcar1">Car name:</label>
             <!-- This input is tied to the car.name object. -->
-            <input type="text" ng-model="car.name" class="form-control" id="newcar1"/>
+            <input type="text" ng-model="car.name" class="form-control" required id="newcar1" ng-minlength="2"  />
             <!-- If there's any errors that pertain to name display them here! -->
             <div ng-repeat="error in errors.name">{{error}}</div>
 
@@ -15,24 +15,25 @@
 
     <div class="form-group">
         <label for="newcar2">Car producer:</label>
-            <input type="text" ng-model="car.producer" id="newcar2" class="form-control"/>
+            <input type="text" ng-model="car.producer" ng-minlength="2" required id="newcar2" class="form-control"/>
+
     </div>
 
     <div class="form-group">
-        <label for="newcar3">Example textarea</label>
-        <textarea class="form-control" id="newcar3" rows="3" ng-model="car.description"></textarea>
+        <label for="newcar3">Description</label>
+        <textarea class="form-control" id="newcar3" rows="3" ng-model="car.description" required></textarea>
     </div>
 
     <div class="form-group">
         <label for="newcar4">Car cost:</label>
-        <input type="text" ng-model="car.cost" id="newcar4" class="form-control"/>
+        <input type="text" ng-model="car.cost" id="newcar4" class="form-control"  required/>
     </div>
 
-    <!--<input type="checkbox" ng-model="car.presence"/>-->
+    <div ng-repeat="error in errors.body" class="alert alert-error"><strong>Body</strong> {{error}}</div>
 
     <div class="form-check">
         <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" value="" ng-model="car.presence">
+            <input class="form-check-input" type="checkbox" value="" ng-model="car.presence" />
             available in stock
         </label>
     </div>
@@ -41,7 +42,21 @@
 
     <div class="control-group">
         <div class="controls">
-            <input class="btn btn-primary" type="submit" value="Create!"/>
+            <input class="btn btn-primary" type="submit" value="Create!" ng-disabled="myForm.$invalid"/>
+            <a onclick="window.location = '#/'" class="btn btn-default" >Cancel</a>
+        </div>
+    </div>
+
+    <div ng-if="newres">
+        <br>
+        <div class="alert alert-success">
+            <strong>Success!</strong> Car successfully created
+        </div>
+    </div>
+    <div ng-if="newres == false">
+        <br>
+        <div class="alert alert-danger">
+            <strong>Error!</strong> Something went wrong
         </div>
     </div>
 

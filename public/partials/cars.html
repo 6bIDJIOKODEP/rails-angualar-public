@@ -19,23 +19,29 @@
                 <tr>
                     <th>id</th>
                     <th>Model</th>
-                    <th>Producer</th>
-                    <th>-</th>
-                    <th>-</th>
+                    <th>On stock</th>
+                    <th>Details</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="car in cars">
                     {{ cosnole.log(cars) }}
                     <td> {{car.id }}</td>
-                    <td width="50%"> {{car.name }} </td>
-                    <td> {{car.producer }}</td>
+                    <td width="50%"> {{car.name }} <i class="fa fa-check" aria-hidden="true"></i></td>
+                    <td>
+                        <div ng-if="car.presence">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        </div>
+                        <div ng-if="!car.presence">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </div>
+                    </td>
                     <!--<td><span ng-bind="car.name"></span></td>-->
-                    <td><a href="#/car/{{car.id}}">Details</a></td>
+                    <td><a href="#/car/{{car.id}}"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a></td>
                     <!-- When the user clicks this button it will call the 'destory()' method within the controller -->
 
-                    <!--<td><a ng-click="destroy($index)" href="">Delete</a></td>-->
-                    <td><a ng-click="destroy($index)" href=""><i class="icon-trash"></i>Delete</a></td>
+                    <td><a ng-click="destroy($index)" href=""><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
                 </tr>
             </tbody>
         </table>
@@ -50,7 +56,7 @@
 
         <div class="well">
             <p>
-                Angular lab
+                Angular + Rails
             </p>
 
         </div>

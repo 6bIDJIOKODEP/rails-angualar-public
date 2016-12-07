@@ -1,4 +1,4 @@
-var cars = angular.module("cars",['ngRoute', 'ngResource']);
+var cars = angular.module("cars",['ngRoute', 'ngResource', 'ngMessages']);
 
 // Define Cars class
 cars.factory('CarModel', ['$resource', function($resource) {
@@ -13,7 +13,7 @@ cars.factory('CarModel', ['$resource', function($resource) {
 cars.controller('CarIndexController', ['$scope', 'CarModel', function($scope, CarModel) {
     //Grab all cars from the server
     $scope.cars = CarModel.index(function(res) {
-        console.log(res)
+
     }, function(error) {
         // Error handler code
     });
@@ -44,20 +44,20 @@ cars.controller('CarCreateController', ['$scope', '$location', 'CarModel', funct
 
         //Save the car object
         car.$save(function() {
-
+            $scope.newres = true
             //Redirect us back to the main page
-            $location.path('/');
+            setTimeout(function () {
+                window.location = '#/'
+            }, 3000);
 
         }, function(response) {
-
+            $scope.newres = false
             //Post response objects to the view
             $scope.errors = response.data.errors;
+            $scope.newres = ""
         });
-    }
+    };
 
-    $scope.discard = function () {
-        $location.path('/');
-    }
 }]);
 
 //A controller to show the car
@@ -66,16 +66,42 @@ cars.controller('CarShowController', ['$scope', 'CarModel', '$routeParams', func
     $scope.car = CarModel.get({id: $routeParams.id})
 
     $scope.edit = function () {
-
         // Now call update passing in the ID first then the object you are updating
-        CarModel.update({id: $scope.car.id}, $scope.car);
+        $scope.car.$update(function(data){
+                // success callback
+                $scope.editres = true
+                setTimeout(function () {
+                    window.location = '#/'
+                }, 3000);
 
-    }
-
-    $scope.discar = function () {
-        alert('ti pidr');
-        $location.path('/');
-    }
-
+            },
+            function(error){
+                // failure callback
+                $scope.editres = false
+                $scope.editres = ""
+            }
+        )
+    };
 }]);
+
+    //         {id: $scope.car.id}, $scope.car)
+    //         .then(
+    //             function(data){
+    //                 // success callback
+    //                 alert(data);
+    //                 $scope.editres = true
+    //                 setTimeout(function () {
+    //                     window.location = '#/'
+    //                 }, 3000);
+    //
+    //             },
+    //             function(error){
+    //                 // failure callback
+    //                 $scope.editres = false
+    //                 $scope.editres = ""
+    //             }
+    //         );
+    // }
+
+// }]);
 
