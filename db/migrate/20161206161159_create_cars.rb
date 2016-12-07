@@ -5,7 +5,6 @@ class CreateCars < ActiveRecord::Migration[5.0]
       t.string :producer
       t.text :description
       t.boolean :presence
-      t.date :release
       t.integer :cost
 
       t.timestamps

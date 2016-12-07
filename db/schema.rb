@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 20161206161159) do
     t.string   "producer"
     t.text     "description"
     t.boolean  "presence"
-    t.date     "release"
     t.integer  "cost"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

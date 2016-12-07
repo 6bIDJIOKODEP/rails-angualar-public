@@ -26,7 +26,13 @@ cars.controller('CarIndexController', ['$scope', 'CarModel', function($scope, Ca
             //If successful, remove it from our collection
             $scope.cars.splice(index, 1);
         });
-    }
+    };
+
+    $scope.discard = function () {
+        alert('ti pidr');
+        $location.path('/');
+    };
+
 }]);
 
 cars.controller('CarCreateController', ['$scope', '$location', 'CarModel', function($scope, $location, CarModel) {
@@ -48,6 +54,10 @@ cars.controller('CarCreateController', ['$scope', '$location', 'CarModel', funct
             $scope.errors = response.data.errors;
         });
     }
+
+    $scope.discard = function () {
+        $location.path('/');
+    }
 }]);
 
 //A controller to show the car
@@ -60,6 +70,11 @@ cars.controller('CarShowController', ['$scope', 'CarModel', '$routeParams', func
         // Now call update passing in the ID first then the object you are updating
         CarModel.update({id: $scope.car.id}, $scope.car);
 
+    }
+
+    $scope.discar = function () {
+        alert('ti pidr');
+        $location.path('/');
     }
 
 }]);
